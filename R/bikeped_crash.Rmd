@@ -1,0 +1,921 @@
+---
+title: "Where do Bike/Ped Crashes Occur?"
+author: "Kyu Ri Kim"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+library(car)  #for scatter plot matrix
+library(MASS) # glm and glm.nb
+library(lattice) #for the levelplots
+library(PerformanceAnalytics)
+library(readr) #for read data
+library(tidyverse)
+library(hrbrthemes)
+library(viridis)
+library(knitr)
+library(ggplot2)
+library(ggcorrplot)
+library(plotly)
+library(dplyr)
+library(lubridate)
+library(leaflet)
+library(sf)
+
+
+# data (CVS) included
+data_segment_ave <- read_csv("G:/My Drive/8_TREC/bikeped/data/data_6yrcrash_vol.csv")
+data_state_year <- read_csv("G:/My Drive/8_TREC/bikeped/data/data_volume_crash_year_new.csv")
+data_state_month <- read_csv("G:/My Drive/8_TREC/bikeped/data/data_volume_crash_month.csv")
+speed <- read_csv("G:/My Drive/8_TREC/bikeped/data/speed_id_halfmi_month.csv")
+
+bikecrash_segment_year <- read_csv("G:/My Drive/8_TREC/bikeped/data/bikecrash_long.csv")
+pedcrash_segment_year <-read_csv("G:/My Drive/8_TREC/bikeped/data/pedcrash_long.csv")
+p_monthly_bike <- read_csv("G:/My Drive/8_TREC/bikeped/data/p_monthly_bike.csv")
+p_monthly_ped <- read_csv("G:/My Drive/8_TREC/bikeped/data/p_monthly_ped.csv")
+
+
+# data (CVS) included
+sf_bikevol <- read_sf("G:/My Drive/8_TREC/bikeped/data/bikevol.shp") %>% mutate(segment_area_id=segment_ar) 
+sf_bikevol <- left_join(sf_bikevol,data_segment_ave,by='segment_area_id')
+
+sf_pedvol <- read_sf("G:/My Drive/8_TREC/bikeped/data/bikevol.shp")%>% mutate(segment_area_id=segment_ar) 
+sf_pedvol <- left_join(sf_pedvol,data_segment_ave,by='segment_area_id')
+
+sf_bikecrash_dcva <- read_sf("G:/My Drive/8_TREC/bikeped/data/bikecrash_dcva.shp")
+sf_pedcrash_dcva <- read_sf("G:/My Drive/8_TREC/bikeped/data/pedcrash_dcva.shp")
+sf_popdenhalf_dcva <- read_sf("G:/My Drive/8_TREC/bikeped/data/dcvapopden_half.shp")
+sf_bikecrash_or <- read_sf("G:/My Drive/8_TREC/bikeped/data/bikecrash_or.shp")
+sf_popdenhalf_or <- read_sf("G:/My Drive/8_TREC/bikeped/data/orpopden_half.shp")
+
+
+# create pivot table for monthly bike volume
+bikevol_segment_month <- mutate(p_monthly_bike, id_yr=paste(segment_area_id,'_',year))
+bikevol_segment_month <- mutate(p_monthly_bike, id_yrmon=paste(segment_area_id,'_',year,'_',month))
+
+
+# create pivot table for monthly ped volume                                
+pedvol_segment_month <- mutate(p_monthly_ped, id_yr=paste(segment_area_id,'_',year))
+pedvol_segment_month <- mutate(p_monthly_ped, id_yrmon=paste(segment_area_id,'_',year,'_',month))
+
+
+# create pivot table for monthly speed by segment_id by year & month    
+speed_state_month <- group_by(speed, state, month)
+speed_state_month <- summarise(speed_state_month,
+                        speed_50th=mean(segment_50thmed),
+                        speed_85th=mean(segment_85thmed),
+                        speed_max=max(segment_max))
+
+
+# create pivot table for yearly bike volume
+data_bike_year <- group_by(bikevol_segment_month, segment_area_id, state, year)
+bikevol_segment_year <- summarise(data_bike_year,
+                                  bikevol_total=sum(vol_mdaily),
+                                  n=n(),
+                                  bikevol=sum(vol_mdaily)/n)
+
+bikevol_segment_year <- mutate(bikevol_segment_year, id_yr=paste(segment_area_id,'_',year))
+
+# create pivot table for yearly ped volume
+data_ped_year <- group_by(pedvol_segment_month, segment_area_id, state, year)
+pedvol_segment_year <- summarise(data_ped_year,
+                                  pedvol_total=sum(vol_mdaily),
+                                  n=n(),
+                                  pedvol=sum(vol_mdaily)/n)
+
+pedvol_segment_year <- mutate(pedvol_segment_year, id_yr=paste(segment_area_id,'_',year))
+
+
+bikecrash_segment_year <- mutate(bikecrash_segment_year, id_yr=paste(segment_area_id,'_',year))
+pedcrash_segment_year <- mutate(pedcrash_segment_year, id_yr=paste(segment_area_id,'_',year))
+
+# create pivot table for yearly speed by segment_id by year & month    
+speed_segment <- group_by(speed, segment_area_id, year)
+speed_segment <- summarise(speed_segment,
+                        speed_50th=mean(segment_50thmed),
+                        speed_85th=mean(segment_85thmed),
+                        speed_max=max(segment_max))
+speed_segment <- mutate(speed_segment, id_yr=paste(segment_area_id,'_',year))
+
+
+# merge bike/ped volume data and speed data by id(segment_area_id, year, month)
+bikevol_speed_segment_year <- inner_join(bikevol_segment_year,speed_segment,by='id_yr')
+bikevol_crash_speed_segment_year <- inner_join(bikevol_speed_segment_year,bikecrash_segment_year,by='id_yr')
+
+pedvol_speed_segment_year <- inner_join(pedvol_segment_year,speed_segment,by='id_yr')
+pedvol_crash_speed_segment_year <- inner_join(pedvol_speed_segment_year,pedcrash_segment_year,by='id_yr')
+
+
+# function for labels
+labels <- function(x) {
+  paste(x, "k")
+}
+
+```
+Exploring the Relationship Between Volumes, Crashes, and Speeds
+
+# 1. Introduction
+**Exploring the Relationship Between Volumes, Crashes, and Speeds**
+
+## 1.1. Background
+Using BikePed Portal data, this case study examines the relationships between bike and pedestrian volumes, surrounding vehicle speeds (RITIS), and bike/ped crashes occurred around permanent count locations.
+In crash analysis, the exposure effect to motorized vehicles is one of the most important crash risk factors. A typical way to measure the exposure effect is to count the volume of each mode. In addition, vehicle speed has a significant impact on the severity of the crash. Therefore, this case study studies whether the frequency of crashes is affected by volumes of pedestrians and cyclists and vehicle speed.
+The study sites are permanent count locations in the state of Oregon, Washington, D.C., and Arlington County, Virginia. The study uses the most recent data available (2018-2023).
+
+## 1.2. Unit for Analysis
+The spatial unit is the space within a half-mile straight-line buffer from the permanent count location. This was set because it is difficult to measure the traffic volume by mode at all points where a collision between modes can occur. Given that traffic volume affects the frequency of crashes, it was assumed that the number of bicycles or pedestrians measured within a half-mile would represent the traffic volume accounting for those crashes.
+
+# 2. Data
+
+## 2.1. Basic Information of Data
+
+**Location**: Oregon, Virginia, Washington D.C.
+
+**Analysis Year**: 2018-2023
+
+**Used Data**: bike & pedestrian count (volume), crash , Census Block group, speed
+
+**Data Source/Year**
+
+|               Data                |                 Source                |    Year    |
+|:---------------------------------:|:-------------------------------------:|:----------:|
+| Bike/Pedestrian Counts            |       BikePed Portal                  | 2018--2023 |
+| Bike/Pedestrian--involved Crash   |       ODOT*, VDOT, DDOT               | 2018--2023 |
+| Land Use (Zoning) Type--DC        |       Open Data DC                    |    2016    |
+| Land Use (Zoning) Type--OR        |       Oregon GEOHub Data              |    2023    |
+| Land Use (Zoning) Type--VA        |       Arlington Virginia ACMaps       |    2021    |
+| Census Block Group Population & Land Area--DC | Open Data DC              |    2020    |
+| Census Block Group Population & Land Area--OR | Oregon GEOHub Data        |    2020    |
+| Census Block Group Population & Land Area--VA | Virginia Open Data Portal |    2020    |
+| Speed--DC, OR, VA                 |       RITIS                           | 2018--2023 |
+
+*Note that ODOT provides crash data with location information through 2022. Since location information is a very important feature in this study, only cases where the location of each crash case was provided were analyzed.
+
+## 2.2. Characteristics of Bike/Ped Crashes & Volume
+### 2.2.1. Population Density (2020) nearby Bike/Ped Volume Data Count Location
+
+**Population Density is the average value within half-mile straight buffer area from the Bike/Ped Volume Counting Spot using census block group population number and area (square-mile)**
+
+**Following characteristics of pedestrian and bike volume and crash counts are  accumulated of each permanent count location**
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_segment_ave) +
+  aes(x=state, y=ave_popden_sqmi, color = state) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  ggtitle("Population Density (2020) by State") +
+  theme_light()+
+  xlab("State") + 
+  ylab("Population Density (persons/sqmi)")
+
+ggplot(data_segment_ave) +
+  aes(x=state, y=vol_6ydaily_bike, color = state) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  ggtitle("Counted Bike Daily Volume by State: 2018-2023") +
+  theme_light()+
+  xlab("State") + 
+  ylab("Bike Volume")
+
+ped_vol_state <- data_segment_ave %>% filter(state !="OR")
+ggplot(ped_vol_state) +
+  aes(x=state, y=vol_6ydaily_ped, color = state) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  ggtitle("Counted Pedestrian Daily Volume by State: 2018-2023") +
+  theme_light()+
+  xlab("State") + 
+  ylab("Pedestrian Volume")
+
+```
+
+### 2.2.2.	Accumulated Bike/Ped Volume by Characteristics of Permanent Count Location
+```{r echo=FALSE, warning=FALSE}
+# Prepare the text for the tooltip:
+pop_bike <- paste(
+   "State: ", sf_bikevol$state, "<br/>", 
+   "Segment: ", sf_bikevol$segment_na, "<br/>", 
+   "Bike_Vol: ", round(sf_bikevol$vol_6ydaily_bike), sep="") %>%
+  lapply(htmltools::HTML) 
+
+pop_ped <- paste(
+   "State: ", sf_pedvol$state, "<br/>", 
+   "Segment: ", sf_pedvol$segment_na, "<br/>", 
+   "Ped_Vol: ", round(sf_pedvol$vol_6ydaily_ped), sep="") %>%
+  lapply(htmltools::HTML) 
+
+### MAP - DC & VA (zoom at DC Area)
+
+# Creating Volume Map:DC&VA
+m_volume_dcva <- leaflet() %>% 
+   addTiles() %>% 
+   setView( lng = -77.0369, lat = 38.9072, zoom = 12) %>% 
+   addProviderTiles("Esri.WorldTopoMap")%>%
+  
+   # Add 2 marker groups: Volume
+     addCircleMarkers(data=sf_pedvol, lng=~long , lat=~lat, 
+                      radius=~vol_6ydaily_ped/100,
+                      fillColor="purple", 
+                      stroke = FALSE, 
+                      fillOpacity = 0.8, 
+                      group="Pedestrian Volume",
+                      label = pop_ped,
+                      labelOptions = labelOptions( style = list("font-weight" = "normal", padding = "3px 8px"), 
+                                                   textsize = "13px", direction = "auto")) %>% 
+       addCircleMarkers(data=sf_bikevol, lng=~long , lat=~lat, 
+                      radius=~vol_6ydaily_bike/100, 
+                      fillColor="blue", 
+                      stroke = FALSE, 
+                      fillOpacity = 0.8, 
+                      group="Bike Volume",
+                      label = pop_bike,
+                      labelOptions = labelOptions( style = list("font-weight" = "normal", padding = "3px 8px"), 
+                                                   textsize = "13px", direction = "auto")) %>%
+
+
+   # Add the control widget
+     addLayersControl(overlayGroups = c("Bike Volume","Pedestrian Volume"),  
+                   options = layersControlOptions(collapsed = FALSE))
+m_volume_dcva 
+
+
+# MAP - OR(zoom at Portland Metropolitan Area)
+m_volume_or <- leaflet() %>% 
+   addTiles() %>% 
+   setView( lng = -122.676483, lat = 45.523064, zoom = 12) %>% 
+   addProviderTiles("Esri.WorldTopoMap") %>%
+  
+   # Add 1 marker: Volume
+     addCircleMarkers(data=sf_bikevol, lng=~long , lat=~lat, 
+                      radius=~vol_6ydaily_bike/30, 
+                      fillColor="blue", 
+                      stroke = FALSE, 
+                      fillOpacity = 0.8, 
+                      group="Bike Volume",
+                      label = pop_bike,
+                      labelOptions = labelOptions( style = list("font-weight" = "normal", padding = "3px 8px"), 
+                                                   textsize = "13px", direction = "auto"))%>% 
+
+   # Add the control widget
+     addLayersControl(overlayGroups = c("Bike Volume"),  
+                   options = layersControlOptions(collapsed = FALSE))
+
+m_volume_or
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_segment_ave) +
+  aes(x=land_use, y=vol_6ydaily_bike, color = land_use) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))+
+  ggtitle("Bike Volume by Land Use Type") +
+  theme_light()+
+  xlab("Land Use") + 
+  ylab("Bike Volume")
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_segment_ave) +
+  aes(x=land_use, y=vol_6ydaily_ped, color = land_use) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))+
+  ggtitle("Pedestrian Volume by Land Use Type") +
+  theme_light()+
+  xlab("Land Use") + 
+  ylab("Pedestrian Volume")
+
+```
+
+```{r echo=FALSE, warning=FALSE}
+data_segment_ave_bike_facility <- data_segment_ave %>% filter(facility_type != "Bridge" & facility_type != "Intersection/Crossing")
+ggplot(data_segment_ave_bike_facility) +
+  aes(x=facility_type, y=vol_6ydaily_bike, color = facility_type) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))+
+  ggtitle("Bike Volume by Factility Type") +
+  theme_light()+
+  xlab("Factility Type") + 
+  ylab("Bike Volume")
+```
+
+*No count numbers for the "Bridge" and "Intersection" doesn't mean that there are no cyclists on the bridges or intersections. It means that the number of cyclists was not collected on the bridges and intersections.*
+
+```{r echo=FALSE, warning=FALSE}
+data_segment_ave_ped_facility <- data_segment_ave %>% filter(facility_type != "Bikelane" & facility_type != "Bridge" & facility_type != "Intersection/Crossing")
+
+ggplot(data_segment_ave_ped_facility) +
+  aes(x=facility_type, y=vol_6ydaily_ped, color = facility_type) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))+
+  ggtitle("Pedestrian Volume by Factility Type") +
+  theme_light()+
+  xlab("Factility Type") + 
+  ylab("Pedestrian Volume")
+
+```
+
+*No count numbers for the "Bikelane", Bridge" and "Intersection" doesn't mean that there are no pedestrians on the bike lanes, bridges or intersections. It means that the number of pedestrians was not collected on the  bike lanes, bridges and intersections.*
+
+### 2.2.3.	Bike/Ped Crash by Characteristics of Data Collecting Locations
+
+```{r echo=FALSE, warning=FALSE}
+
+### MAP Crash & Pop Density - DC & VA (zoom at DC Area)
+
+# Clean the data object
+sf_popdenhalf_dcva <- sf_popdenhalf_dcva %>%
+  mutate(popden_sqmi = ifelse(popden_sqm == 0, NA, round(popden_sqm/ 1000, 2)))
+
+library(RColorBrewer)
+mybins_dcva_popden <- c(0, 5, 10, 20, 30, 50, 100, Inf)
+mypalette_dcva <- colorBin(
+  palette = "YlGn", domain = sf_popdenhalf_dcva$popden_sqmi,
+  na.color = "transparent", bins = mybins_dcva_popden
+)
+
+# Creating Crash & Pop Density Map:DC&VA
+m_crash_dcva <- leaflet(sf_popdenhalf_dcva) %>% 
+   addTiles() %>% 
+   setView( lng = -77.0369, lat = 38.9072, zoom = 11) %>% 
+   addProviderTiles("Esri.WorldTopoMap")%>%
+  
+   # Add choropleth groups: Population Density
+  addPolygons(stroke = FALSE, fillOpacity = 0.8,
+    smoothFactor = 0.2, color = ~mypalette_dcva(popden_sqmi)) %>%
+    
+  # Add the palette legend
+   leaflet::addLegend(
+     pal = mypalette_dcva, values = ~popden_sqmi, 
+     title = "Pop. Density (K/sqmi)", position = "bottomleft", 
+     opacity = 0.8)  %>%
+
+  # Add 2 marker groups: Crash
+     addCircleMarkers(data=sf_bikecrash_dcva, 
+                      radius=1.5, 
+                      fillColor="red", 
+                      stroke = FALSE, 
+                      fillOpacity = 0.8, 
+                      group="Bike Crash") %>%
+     addCircleMarkers(data=sf_pedcrash_dcva, 
+                      radius=1.5,
+                      fillColor="orange", 
+                      stroke = FALSE, 
+                      fillOpacity = 0.8, 
+                      group="Pedestrian Crash") %>% 
+
+   # Add the control widget
+     addLayersControl(overlayGroups = c("Bike Crash", "Pedestrian Crash"),  
+                   options = layersControlOptions(collapsed = FALSE))
+
+m_crash_dcva 
+
+### MAP Crash & Pop Density - OR (zoom at DC Area)
+
+# Clean the data object
+sf_popdenhalf_or <- sf_popdenhalf_or %>%
+  mutate(popden_sqmi = round(popden/1000, 2))
+
+mybins_or_popden <- c(0, 5, 10, 20, 30, 50, 100, Inf)
+mypalette_or <- colorBin(
+  palette = "YlGn", domain = sf_popdenhalf_or$popden_sqmi,
+  na.color = "transparent", bins = mybins_or_popden
+)
+
+# MAP - OR(zoom at Portland Metropolitan Area)
+m_crash_or <- leaflet(sf_popdenhalf_or) %>% 
+   addTiles() %>% 
+   setView( lng = -122.676483, lat = 45.523064, zoom = 11) %>% 
+   addProviderTiles("Esri.WorldTopoMap") %>%
+  
+  # Add choropleth groups: Population Density
+  addPolygons(stroke = FALSE, fillOpacity = 0.8,
+    smoothFactor = 0.2, color = ~mypalette_or(popden_sqmi)) %>%
+    
+  # Add the palette legend
+   leaflet::addLegend(
+     pal = mypalette_or, values = ~popden_sqmi, 
+     title = "Pop. Density (K/sqmi)", position = "bottomleft", 
+     opacity = 0.8)  %>%
+  
+  # Add 2 marker : Crash
+     addCircleMarkers(data=sf_bikecrash_or, 
+                      radius=1.5, 
+                      fillColor="red", 
+                      stroke = FALSE, 
+                      fillOpacity = 0.8, 
+                      group="Bike Crash") %>%
+
+    
+   # Add the control widget
+     addLayersControl(overlayGroups = c("Bike Crash"),  
+                   options = layersControlOptions(collapsed = FALSE))
+m_crash_or
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_segment_ave) +
+  aes(x=land_use, y=bikecr_yrave, color = land_use) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))+
+  ggtitle("Bike Crash by Land Use Type") +
+  theme_light()+
+  xlab("Land Use") + 
+  ylab("Bike Crash")
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_segment_ave) +
+  aes(x=facility_type, y=bikecr_yrave, color = facility_type) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))+
+  ggtitle("Bike Crash by Factility Type") +
+  theme_light()+
+  xlab("Factility Type") + 
+  ylab("Bike Crash")
+```
+
+
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_segment_ave) +
+  aes(x=land_use, y=pedcr_yrave, color = land_use) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))+
+  ggtitle("Pedestrian-involved Crash by Land Use Type") +
+  theme_light()+
+  xlab("Land Use") + 
+  ylab("Pedestrian-involved Crash")
+```
+
+```{r echo=FALSE, warning=FALSE}
+pedcrah_facility <- data_segment_ave %>% filter(facility_type != "Bridge" & facility_type != "Intersection/Crossing")
+ggplot(data_segment_ave) +
+  aes(x=facility_type, y=pedcr_yrave, color = facility_type) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  scale_x_discrete(guide = guide_axis(n.dodge=2))+
+  ggtitle("Pedestrian-involved Crash by Factility Type") +
+  theme_light()+
+  xlab("Factility Type") + 
+  ylab("Pedestrian-involved Crash")
+```
+
+### 2.2.4.	Vehicle Speed near the Permanent Counting Location
+```{r echo=FALSE, include=FALSE}
+speed_year <- group_by(speed, segment_area_id, state, year)
+speed_year <- summarise(speed_year,
+                        speed_50th=mean(segment_50thmed),
+                        speed_85th=mean(segment_85thmed),
+                        speed_max=max(segment_max))
+```
+
+
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(speed_year) +
+  aes(x=state, y=speed_85th, color = state) +
+  geom_boxplot() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.7, option="A") +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  ggtitle("Speed (85th) by State") +
+  theme_light()+
+  xlab("State") + 
+  ylab("Speed 85th (mph)")
+
+
+```
+
+
+
+# 3. Bike/Ped Crash & Volume Trend by Year
+## 3.1. Bike Crash/Volume Trend by Year 
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_state_year) +
+  aes(x=year, y=(bike_vol), color=state) +
+    geom_line(size=1) +
+    scale_color_viridis(discrete = TRUE) +
+    ggtitle("Bike Volume by Permanent Count Location: 2018-2023") +
+      theme_light()+
+       xlab("Year") + ylab("Bike Volume")+
+      scale_y_continuous(limits = c(0,500))
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_state_year) +
+  aes(x=year, y=num_bikecrash_persegmentid, color=state) +
+    geom_line(size=1) +
+    geom_point(shape=21, color="black", fill="red", size=2.5) +
+    scale_color_viridis(discrete = TRUE) +
+    ggtitle("Bike Crashes by Permanent Count Location: 2018-2023") +
+      theme_light()+
+       xlab("Year") + ylab("Bike Crashes (n/number of Permanent Count Location)")+
+   ylim(0,12)
+```
+
+## 3.2. Pedstrian Crash/Volume Trend by Year 
+```{r echo=FALSE, warning=FALSE}
+# Custom Y-axis labels
+data_ped_year <- data_state_year %>% filter(state != "OR")
+ggplot(data_ped_year) +
+  aes(x=year, y=(ped_vol), color=state) +
+    geom_line(size=1) +
+    scale_color_viridis(discrete = TRUE) +
+    ggtitle("Average Pedestrian Volume by Permanent Count Location: 2018-2023") +
+      theme_light()+
+       xlab("Year") + ylab("Average Pedestrian Volume")+
+    scale_y_continuous(limits= c(0,1500))
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_ped_year) +
+  aes(x=year, y=num_pedcrash_persegmentid, color=state) +
+    geom_line(size=1) +
+    geom_point(shape=21, color="black", fill="red", size=2.5) +
+    scale_color_viridis(discrete = TRUE) +
+    ggtitle("Average Pedestrian Crashes by Permanent Count Location: 2018-2023") +
+      theme_light()+
+       xlab("Year") + ylab("Pedestrian Crashes (n/number of Permanent Count Location)")+
+   ylim(0,17)
+```
+
+## 3.3. Vehicle Speed Trend by Year & State 
+```{r echo=FALSE, include=FALSE}
+
+speed_state <- group_by(speed, state, year)
+speed_state <- summarise(speed_state,
+                        speed_50th=mean(segment_50thmed),
+                        speed_85th=mean(segment_85thmed),
+                        speed_max=max(segment_max))
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(speed_state) +
+  aes(x=year, color=state) +
+    geom_line(aes (y= speed_85th),size=1) +
+     scale_color_viridis(discrete = TRUE) +
+    ggtitle("Speed (50th) Yearly Trend by State") +
+      theme_light()+
+       xlab("Year") + ylab("Speed 85th (mph)") + ylim(0,35)
+
+ggplot(speed_state) +
+  aes(x=year, color=state) +
+    geom_line(aes (y= speed_max),size=1) +
+     scale_color_viridis(discrete = TRUE) +
+    ggtitle("Maximum Speed Yearly Trend by State") +
+      theme_light()+
+       xlab("Year") + ylab("Maximum Speed (mph)") + ylim(50,95)
+
+```
+
+# 4. Bike/Ped Crash & Volume Trend by Month
+## 4.1.	Bike Crash/Volume Trend by Month 
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_state_month) +
+  aes(x=month, y=(bike_vol_ave_bysegment), color=state) +
+    geom_line(size=1) +
+    scale_color_viridis(discrete = TRUE) +
+    ggtitle("Average Bike Volume by Permanent Count Location: 2018-2023") +
+      theme_light()+
+       xlab("Month") + ylab("Bike Volume")+
+      scale_y_continuous(limits = c(0,600))+
+   scale_x_continuous(
+    breaks = seq_along(month.name), 
+    labels = month.name
+  ) +theme(
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_state_month) +
+  aes(x=month, y=bike_crash_ave_bysegment, color=state) +
+    geom_line(size=1) +
+    geom_point(shape=21, color="black", fill="red", size=2.5) +
+    scale_color_viridis(discrete = TRUE) +
+    ggtitle("Average Bike Crashes by Permanent Count Location: 2018-2023") +
+      theme_light()+
+       xlab("Month") + ylab("Bike Crashes (n/number of Permanent Count Location)")+
+   scale_y_continuous(limits = c(0,36))+   
+   scale_x_continuous(
+    breaks = seq_along(month.name), 
+    labels = month.name
+  ) +theme(
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+```
+
+## 4.2. Pedestrian Crash/Volume Trend by Month 
+```{r echo=FALSE, warning=FALSE}
+data_ped_month <- data_state_month %>% filter(state != "OR")
+
+ggplot(data_ped_month) +
+  aes(x=month, y=(ped_vol_ave_bysegment), color=state) +
+    geom_line(size=1) +
+    scale_color_viridis(discrete = TRUE) +
+    ggtitle("Average Ped Volume by Permanent Count Location: 2018-2023") +
+      theme_light()+
+       xlab("Month") + ylab("Ped Volume")+
+      scale_y_continuous(limits = c(0,1400))+
+   scale_x_continuous(
+    breaks = seq_along(month.name), 
+    labels = month.name
+  ) +theme(
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+```
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(data_ped_month) +
+  aes(x=month, y=ped_crash_ave_bysegment, color=state) +
+    geom_line(size=1) +
+    geom_point(shape=21, color="black", fill="red", size=2.5) +
+    scale_color_viridis(discrete = TRUE) +
+    ggtitle("Average Ped Crashes by Permanent Count Location: 2018-2023") +
+      theme_light()+
+       xlab("Month") + ylab("Ped Crashes (n/number of Permanent Count Location)")+
+   scale_y_continuous(limits = c(0,40))+   
+   scale_x_continuous(
+    breaks = seq_along(month.name), 
+    labels = month.name
+  ) +theme(
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+```
+
+## 4.3. Vehicle Speed Trend by Month 
+
+```{r echo=FALSE, warning=FALSE}
+ggplot(speed_state_month) +
+  aes(x=month, y=speed_50th, color=state) +
+    geom_line(size=1) +
+    scale_color_viridis(discrete = TRUE) +
+    ggtitle("Speed Monthly Trend by State") +
+      theme_light()+
+       xlab("Month") + ylab("Speed 50 percentile (mph)")+
+       scale_x_continuous(
+    breaks = seq_along(month.name), 
+    labels = month.name
+  ) +theme(
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+
+ggplot(speed_state_month) +
+  aes(x=month, y=speed_max, color=state) +
+    geom_line(size=1) +
+    scale_color_viridis(discrete = TRUE) +
+    ggtitle("Speed Monthly Trend by State") +
+      theme_light()+
+       xlab("Month") + ylab("Maximum Vehicle Speed (mph)")+
+  ylim(50,95)+
+       scale_x_continuous(
+    breaks = seq_along(month.name), 
+    labels = month.name
+  ) +theme(
+    axis.text.x = element_text(angle = 30, hjust = 1)
+  )
+```
+
+# 5.	Relationship between Crash & Volume & Population by State
+## 5.1.	Population & Bike Crash/Volume by State
+```{r echo=FALSE, warning=FALSE}
+
+ggplot(data_segment_ave, aes(x=ave_popden_sqmi, y=vol_6ydaily_bike, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Population Density & Bike Volume") +
+    xlab("Population Density (person/sqmi)") + ylab("Average Bike Volume (n/year)")+
+    theme_ipsum()+
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+ggplot(data_segment_ave, aes(x=vol_6ydaily_bike, y=bikecr_yrave, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Bike Volume & Bike Crash") +
+    xlab("Average Bike Volume (n/number of collecting area/year)") + ylab("Average Bike Crashes (n/year)")+
+    theme_ipsum()+
+  geom_smooth(formula = y ~ x, method=lm, se=FALSE, fullrange=FALSE)
+
+
+
+data_bike3d <- data_segment_ave %>% filter(!is.na(vol_6ydaily_bike))
+bike3d <- plot_ly(data_bike3d, x = ~ave_popden_sqmi, y = ~vol_6ydaily_bike, z = ~bikecr_yrave,
+               marker = list(color = ~bikecr_yrave, colorscale = c('mistyrose', 'red4'), showscale = TRUE)) %>% add_markers()
+bike3d <- bike3d %>% layout(scene = list(xaxis = list(title = 'Population Density'),
+                                   yaxis = list(title = 'Bike Volume'),
+                                   zaxis = list(title = 'Bike Crash')),
+                      annotations = list(
+                        x = 1.13,
+                        y = 1.05,
+                        text = 'Bike Crash number/Collecting Spot/Year',
+                        xref = 'paper',
+                        yref = 'paper',
+                        showarrow = FALSE
+                        ))
+bike3d
+```
+
+## 5.2.	Population & Pedestrian Crash/Volume by State
+```{r echo=FALSE, warning=FALSE}
+
+data_ped <- data_segment_ave %>% filter(state !='OR')
+ggplot(data_ped, aes(x=ave_popden_sqmi, y=vol_6ydaily_ped, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Population Density & Pedestrian Volume") +
+    xlab("Population Density (person/sqmi)") + ylab("Average Pedestrian Volume (n/year)")+
+    theme_ipsum()+
+    geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+
+ggplot(data_ped, aes(x=vol_6ydaily_ped, y=pedcr_yrave, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Pedestrian Volume & Pedestrian Crash") +
+    xlab("Average Pedestrian Volume (n/number of collecting area/year)") + ylab("Average Pedestrian Crashes (n/year)")+
+    theme_ipsum()+
+    geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+
+data_ped3d <- data_ped %>% filter(!is.na(vol_6ydaily_ped))
+ped3d <- plot_ly(data_ped3d, x = ~ave_popden_sqmi, y = ~vol_6ydaily_ped, z = ~pedcr_yrave,
+               marker = list(color = ~pedcr_yrave, colorscale = c('mistyrose', 'red4'), showscale = TRUE)) %>% add_markers()
+ped3d <- ped3d %>% layout(scene = list(xaxis = list(title = 'Population Density'),
+                                   yaxis = list(title = 'Pedestrian Volume'),
+                                   zaxis = list(title = 'Pedestrian Crash')),
+                      annotations = list(
+                        x = 1.13,
+                        y = 1.05,
+                        text = 'Pedestrian Crash number/Collecting Spot/Year',
+                        xref = 'paper',
+                        yref = 'paper',
+                        showarrow = FALSE
+                        ))
+ped3d
+```
+
+# 6.	Crash & Volume & Vehicle Speed 
+## 6.1.	Bike Crashes near Permanent Count Locations
+```{r echo=FALSE, warning=FALSE}
+
+data_6_1 <- bikevol_crash_speed_segment_year %>% filter (bikevol<12000)
+
+ggplot(data_6_1, aes(x=bikevol, y=bikecrash, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Bike Volume & Bike Crash") +
+    xlab("Bike Volume") + ylab("Bike Crashes")+
+    theme_ipsum()+ 
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+ggplot(data_6_1, aes(y=bikevol, x=speed_50th, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Bike Volume & Vehicel Speed (50th)") +
+    ylab("Bike Volume") + xlab("Vehicle Speed 50th (mph)")+
+    theme_ipsum()+ 
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+ggplot(data_6_1, aes(y=bikevol, x=speed_max, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Bike Volume & Vehicel Speed (max)") +
+    ylab("Bike Volume") + xlab("Vehicle Speed max (mph)")+
+    theme_ipsum()+ 
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+ggplot(data_6_1, aes(x=speed_50th, y=bikecrash, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Bike Crash & Vehicel Speed (50th)") +
+    xlab("Vehicle Speed 50th (mph)") + ylab("Bike Crashes")+
+    theme_ipsum()+
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+ggplot(data_6_1, aes(x=speed_max, y=bikecrash, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Bike Crash & Vehicel Speed (max)") +
+    xlab("Vehicle Speed max (mph)") + ylab("Bike Crashes")+
+    theme_ipsum()+
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+bike3d_speed_max <- plot_ly(data_6_1, x = ~bikevol, y = ~speed_50th, z = ~bikecrash,
+               marker = list(color = ~bikecrash, colorscale = c('mistyrose', 'red4'), showscale = TRUE)) %>% add_markers()
+bike3d_speed_max <- bike3d_speed_max %>% layout(scene = list(xaxis = list(title = 'Bike Volume'),
+                                   yaxis = list(title = 'Vehicle Speed'),
+                                   zaxis = list(title = 'Bike Crash')),
+                      annotations = list(
+                        x = 1.13,
+                        y = 1.05,
+                        text = 'Bike Crash number within half-mile buffer area from the Permanent Bike/Ped Count Location',
+                        xref = 'paper',
+                        yref = 'paper',
+                        showarrow = FALSE
+                        ))
+bike3d_speed_max
+```
+
+## 6.2.	Pedestrian Crashes near Permanent Count Locations
+```{r echo=FALSE, warning=FALSE}
+
+data_6_2 <- pedvol_crash_speed_segment_year %>% filter (pedvol<7500)
+ggplot(data_6_2, aes(x=pedvol, y=pedcrash, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Pedestrian Volume & Pedestrian Crash") +
+    xlab("Pedestrian Volume") + ylab("Pedestrian Crashes")+
+    theme_ipsum()+ 
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+ggplot(data_6_2, aes(y=pedvol, x=speed_50th, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Pedestrian Volume & Vehicel Speed (50th)") +
+    ylab("Pedestrian Volume") + xlab("Vehicle Speed 50th (mph)")+
+    theme_ipsum()+
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+ggplot(data_6_2, aes(y=pedvol, x=speed_max, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Pedestrian Volume & Vehicel Speed (max)") +
+    ylab("Pedestrian Volume") + xlab("Vehicle Speed max (mph)")+
+    theme_ipsum()+ 
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+ggplot(data_6_2, aes(x=speed_50th, y=pedcrash, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Pedestrian Crash & Vehicel Speed (50th)") +
+    xlab("Vehicle Speed 50th (mph)") + ylab("Pedestrian Crashes")+
+    theme_ipsum()+
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+ggplot(data_6_2, aes(x=speed_max, y=pedcrash, shape=state, color=state)) + 
+    geom_point(size=3) +
+    ggtitle("Pedestrian Crash & Vehicel Speed (max)") +
+    xlab("Vehicle Speed max (mph)") + ylab("Pedestrian Crashes")+
+    theme_ipsum()+
+  geom_smooth(formula = y ~ x,method=lm, se=FALSE, fullrange=FALSE)
+
+ped3d_speed_max <- plot_ly(data_6_2, x = ~pedvol, y = ~speed_50th, z = ~pedcrash,
+               marker = list(color = ~pedcrash, colorscale = c('mistyrose', 'red4'), showscale = TRUE)) %>% add_markers()
+ped3d_speed_max <- ped3d_speed_max %>% layout(scene = list(xaxis = list(title = 'Pedestrian Volume'),
+                                   yaxis = list(title = 'Vehicle Speed'),
+                                   zaxis = list(title = 'Pedestrian Crash')),
+                      annotations = list(
+                        x = 1.13,
+                        y = 1.05,
+                        text = 'Pedestrian Crash number within half-mile buffer area from the Permanent Bike/Ped Count Location',
+                        xref = 'paper',
+                        yref = 'paper',
+                        showarrow = FALSE
+                        ))
+ped3d_speed_max
+```

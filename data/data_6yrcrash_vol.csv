@@ -1,0 +1,281 @@
+,segment_area_id,segment_name,state,facility_type,paved,land_use,ave_popden_sqmi,pedcr_yrave,bikecr_yrave,vol_6ydaily_bike,vol_6ydaily_ped
+1,37,Military Rd (26th Place),VA,Bikelane,PAVED,Residential,3394.459246,0.666666667,0.5,33.4919524,NA
+2,38,Four Mile Run Trail,VA,Path/Trail,PAVED,Residential,13053.50286,1.166666667,1.5,NA,NA
+3,39,Custis Trail (Bon Air Park),VA,Path/Trail,PAVED,Park/Speical/Protected,7288.806862,1.333333333,0.333333333,325.2943364,166.1857544
+4,46,W&OD Trail (Bon Air Park-West),VA,Path/Trail,PAVED,Park/Speical/Protected,7330.347365,1.5,0.5,476.1420957,735.2312726
+5,48,W&OD Trail (East Falls Church),VA,Path/Trail,PAVED,Industrial,6948.155381,1.166666667,2,85.97332323,409.7261481
+6,49,N Quincy St (11th St),VA,Bikelane,PAVED,Residential,21763.87627,9.666666667,2.5,60.54355772,NA
+7,57,Fairfax Dr,VA,Bikelane,PAVED,Commercial/Employment,21308.28072,7.166666667,3,101.6175872,NA
+8,58,Clarendon Blvd,VA,Bikelane,PAVED,Commercial/Employment,25370.92163,9.166666667,5.5,103.7264773,NA
+9,59,Wilson Blvd,VA,Bikelane,PAVED,Commercial/Employment,26222.20745,8.5,5.166666667,164.6094022,NA
+10,172,Mt Vernon Trail - Airport South,VA,Path/Trail,PAVED,Park/Speical/Protected,4952.014571,1,1,884.8880259,538.9856919
+11,234,Crystal Dr,VA,Bikelane,PAVED,Commercial/Employment,10468.75697,6,2,110.6980392,NA
+12,272,Custis Trail (Rosslyn),VA,Path/Trail,PAVED,Park/Speical/Protected,17185.08517,3.666666667,4,114.6480694,919.6345052
+13,273,W&OD Trail (Columbia Pike),VA,Path/Trail,PAVED,Park/Speical/Protected,20448.09942,4.833333333,1,247.1837664,533.2735261
+14,274,Ballston Connector,VA,Path/Trail,PAVED,Park/Speical/Protected,9681.137398,2.833333333,1.833333333,76.65699908,248.2768195
+15,276,Bluemont Trail Connector,VA,Path/Trail,PAVED,Park/Speical/Protected,12348.79174,3.833333333,1.833333333,133.4584197,1266.211612
+16,278,Crystal City Connector,VA,Path/Trail,PAVED,Park/Speical/Protected,12877.54961,6.166666667,1.833333333,220.1396219,198.9352702
+17,279,S Joyce St,VA,Road(no bikelane),PAVED,Park/Speical/Protected,8314.90588,4,0.666666667,11.4460999,253.9706747
+18,282,Rosslyn Bikeometer,VA,Path/Trail,PAVED,Park/Speical/Protected,14107.41062,7.166666667,4.833333333,374.1109149,NA
+19,283,Key Bridge,VA,Sidewalk,PAVED,Park/Speical/Protected,13147.85707,6.5,4.666666667,293.6129251,1472.210236
+20,284,Mt. Vernon Trail (Theodore Roosevelt Island),VA,Path/Trail,PAVED,Park/Speical/Protected,11594.0762,6.833333333,4,308.548702,378.8258383
+21,538,R St from 13th St to Vermont,DC,Sidewalk,PAVED,Residential,37781.50541,46.83333333,47.33333333,NA,NA
+22,539,Monroe St NE from 9th St to 10th St,DC,Sidewalk,PAVED,Mixed-Use,9613.04053,7.333333333,5.833333333,NA,NA
+23,540,Massachusetts Ave NW from 39th to Idaho,DC,Sidewalk,PAVED,Residential,16984.94787,6.5,3,NA,NA
+24,541,Calvert St NW (Ellington Bridge),DC,Sidewalk,PAVED,Park/Speical/Protected,20654.16316,8.333333333,9.833333333,NA,NA
+25,1396,Medgar Evers Bike Trail,VA,Path/Trail,PAVED,Park/Speical/Protected,1082.579476,0.166666667,0,282.5524518,282.9931629
+26,1401,Custis Trail (Ballston Beaver Pond),VA,Path/Trail,PAVED,Park/Speical/Protected,9660.205447,2.833333333,1.833333333,NA,NA
+27,1403,Custis Trail (Lee Highway and N Lynn Street),VA,Path/Trail,PAVED,Park/Speical/Protected,14116.86249,7.166666667,4.833333333,374.1422849,NA
+28,1405,Four Mile Run Trail (Highway 395),VA,Path/Trail,PAVED,Residential,13052.74083,1.166666667,1.5,NA,NA
+29,1408,Trail along N Rhodes Street,VA,Path/Trail,PAVED,Residential,22385.58194,5.5,4.833333333,NA,NA
+30,1412,Arlington Boulevard Trail,VA,Path/Trail,PAVED,Park/Speical/Protected,23227.61145,4.166666667,2.333333333,NA,NA
+31,1413,Mt. Vernon Trail (Lee Hwy & N Lynn St),VA,Path/Trail,PAVED,Park/Speical/Protected,13789.346,7.166666667,4.833333333,NA,NA
+32,1415,Sidewalk on N Nash Street (Arlington Temple),VA,Sidewalk,PAVED,Mixed-Use,16665.75264,8.666666667,7.166666667,NA,NA
+33,1416,Sidewalk on Campbell Avenue (outside Robeks),VA,Sidewalk,PAVED,Commercial/Employment,11814.32601,1.333333333,1.166666667,NA,NA
+34,1417,Mt. Vernon Trail (Theodore Roosevelt Bridge - Bike),VA,Path/Trail,PAVED,Park/Speical/Protected,8187.537171,3.833333333,3,121.9774687,NA
+35,1418,Mt. Vernon Trail (Theodore Roosevelt Bridge - Ped),VA,Path/Trail,PAVED,Park/Speical/Protected,8214.113964,3.833333333,3,NA,63.08806701
+36,1419,Sidewalk on Clarendon Blvd (outside BB&T),VA,Sidewalk,PAVED,Commercial/Employment,28888.22374,6.166666667,4.166666667,NA,NA
+37,1420,Mt. Vernon Trail (near Potomac Trail),VA,Path/Trail,PAVED,Park/Speical/Protected,11562.73787,6.833333333,4,NA,NA
+38,1421,Washington and Old Dominion Trail - Bike,VA,Path/Trail,PAVED,Park/Speical/Protected,7301.689168,1.333333333,0.333333333,330.7416577,NA
+39,1422,Washington and Old Dominion Trail  - Ped,VA,Path/Trail,PAVED,Park/Speical/Protected,7305.982744,1.333333333,0.333333333,NA,348.6333497
+40,1423,Washington and Old Dominion Trail (near Fire Station 6)  - Bike,VA,Path/Trail,PAVED,Industrial,6884.84133,1.166666667,1.666666667,246.190913,NA
+41,1424,Washington and Old Dominion Trail  (near Fire Station 6)  - Ped,VA,Path/Trail,PAVED,Industrial,6874.973472,1.166666667,1.5,NA,873.8153034
+42,1427,Mt. Vernon Trail (near turn off Rochambeau Memorial Bridge) - Bike,VA,Path/Trail,PAVED,Park/Speical/Protected,570.671635,0,0,461.1313593,NA
+43,1428,Mt. Vernon Trail (near turn off Rochambeau Memorial Bridge) - Ped,VA,Path/Trail,PAVED,Park/Speical/Protected,570.1928934,0,0,NA,103.3510696
+44,1436,Four Mile Run (across Parc East Condominiums),VA,Path/Trail,PAVED,Park/Speical/Protected,13065.96568,1.166666667,1.5,NA,NA
+45,1437,Clarendon Blvd Sidewalk (outside Urban Halo Salon),VA,Road(no bikelane),PAVED,Commercial/Employment,20940.04774,9.833333333,5.333333333,NA,NA
+46,1548,Georgetown VC,DC,Path/Trail,PAVED,Mixed-Use,14649.71769,17.83333333,14.66666667,NA,NA
+47,1549,GeorgetownMuleBridge,DC,Path/Trail,UNPAVED,Mixed-Use,13454.23179,13.16666667,9.666666667,NA,NA
+48,1550,Capital Crescent Trail,DC,Path/Trail,PAVED,Commercial/Employment,3653.35358,1,1.166666667,NA,NA
+49,1551,Chain Bridge,DC,Path/Trail,PAVED,Park/Speical/Protected,3533.701957,0.333333333,0.333333333,NA,NA
+50,1669,Anacostia River Trail - 11th St,DC,Path/Trail,PAVED,Park/Speical/Protected,4573.484205,10.66666667,2.333333333,969.9604632,3510.323043
+51,1670,Anacostia River Trail - River Terrace,DC,Path/Trail,PAVED,Park/Speical/Protected,5165.380829,1.833333333,1,88.20960065,65.71434126
+52,1671,Anacostia River Trail - Benning,DC,Path/Trail,PAVED,Park/Speical/Protected,3966.662469,1.666666667,1,80.27160069,27.97353161
+53,1672,Anacostia River Trail - Deane Ave,DC,Path/Trail,PAVED,Park/Speical/Protected,7263.488988,5.333333333,0.833333333,104.2457923,41.91887194
+54,1673,Anacostia River Trail - Kenilworth Park,DC,Path/Trail,PAVED,Park/Speical/Protected,3787.998301,0.666666667,0,148.4140706,141.5675804
+55,1674,Met Branch Trail,DC,Path/Trail,PAVED,Commercial/Employment,12085.00376,15.33333333,4,247.7607873,401.9380556
+56,1675,Wharf Classic - Maine Ave Cycle Track,DC,Path/Trail,PAVED,Mixed-Use,13525.13186,9.5,6,98.02442706,NA
+57,1676,Eye St SW bikelane,DC,Road(no bikelane),PAVED,Residential,21583.9034,10.83333333,9,103.8170923,NA
+58,1677,East Capitol Street,DC,Road(no bikelane),PAVED,Residential,17463.32687,15.33333333,10.66666667,187.7593308,NA
+59,1678,1st St NE,DC,Road(no bikelane),PAVED,Commercial/Employment,13910.65503,30.5,23.83333333,2508.380332,5035.645905
+60,1679,Kaiser Permanente Center for Total Health,DC,Road(no bikelane),PAVED,Commercial/Employment,20240.68201,27.16666667,24.16666667,NA,286.6590736
+61,1680,11th St NW,DC,Road(no bikelane),PAVED,Mixed-Use,19568.35155,50.33333333,36.83333333,84.86361111,9.544917675
+62,1681,15th St NW Cycletrack,DC,Road(no bikelane),PAVED,Mixed-Use,31442.27232,42.33333333,42.33333333,336.0079618,NA
+63,1682,R Street NW,DC,Road(no bikelane),PAVED,Residential,37023.64732,48,48,253.9444197,NA
+64,1683,Columbia Rd NW,DC,Road(no bikelane),PAVED,Residential,42862.27699,28.66666667,27,172.2157182,NA
+65,1684,14th St NW,DC,Road(no bikelane),PAVED,Residential,17376.15066,14.83333333,3.666666667,79.11750721,NA
+66,1685,Mount Vernon Trail #1,VA,Path/Trail,PAVED,Park/Speical/Protected,4920.500513,0.666666667,0.333333333,101.3722262,250.322957
+67,1686,Mount Vernon Trail #3,VA,Path/Trail,PAVED,Park/Speical/Protected,5795.984557,1.333333333,0.166666667,295.2629233,226.265693
+68,1687,Rock Creek Trail @ Shoreham Drive,DC,Path/Trail,PAVED,Park/Speical/Protected,15006.00991,4.666666667,4.5,248.5983548,403.6904679
+69,1691,Zoo Loop Trail,DC,Path/Trail,PAVED,Park/Speical/Protected,16999.10565,6.166666667,3.5,85.24967532,127.6887311
+70,1695,Rose Park Trail @ P Street NW,DC,Path/Trail,PAVED,Park/Speical/Protected,17136.46905,17,17,174.1326764,1093.077004
+71,1699,Rock Creek Trail @ Peirce Mill,DC,Path/Trail,PAVED,Park/Speical/Protected,7448.711911,0.333333333,0.833333333,221.0562244,451.0084981
+72,1703,MVT at Waynewood Blvd. (Bridge 12),VA,Path/Trail,PAVED,Park/Speical/Protected,2987.941896,0,0,81.11482387,112.3113215
+73,1707,Piney Branch Trail,DC,Path/Trail,PAVED,Park/Speical/Protected,22951.01505,9.5,5.166666667,44.33140201,1912.968886
+74,1735,K/Wisconsin at Waterfront Park,DC,Path/Trail,PAVED,Mixed-Use,11052.15126,17,14.33333333,75.71701656,97.11136286
+75,1742,Bluemont Junction Trail at Frederick St,VA,Path/Trail,PAVED,Park/Speical/Protected,8086.335524,0.666666667,0.5,114.0787579,282.7323197
+76,1744,Arlington Memorial Bridge,VA,Sidewalk,PAVED,Park/Speical/Protected,163.3579862,0,0,191.5503408,346.174638
+77,1745,31st St. Georgetown,DC,Path/Trail,UNPAVED,Mixed-Use,13570.23857,18,14.83333333,NA,NA
+78,1746,Potomac St. Georgetown,DC,Path/Trail,UNPAVED,Mixed-Use,11421.68293,16.83333333,14.33333333,NA,NA
+79,1748,Marvin Gaye Trail at 48th Pl NE,DC,Path/Trail,PAVED,Residential,12956.79996,5.833333333,1.5,NA,NA
+80,1749,Marvin Gaye Trail at 60th St NE,DC,Path/Trail,PAVED,Residential,11119.82155,6,1,NA,NA
+81,1750,Oxon Run Park East Bank,DC,Path/Trail,PAVED,Residential,14919.56351,15.5,0.833333333,NA,NA
+82,1751,Oxon Run Park West Bank,DC,Path/Trail,PAVED,Residential,14453.34566,15.33333333,1,NA,NA
+83,1758,Arlington Mill Drive Trail,VA,Path/Trail,PAVED,Park/Speical/Protected,11094.21736,1.833333333,2,NA,435.1980705
+84,1759,W Trail by East Falls Church Park&OD,VA,Path/Trail,PAVED,Park/Speical/Protected,7052.339647,0.5,1,NA,206.1025719
+85,1760,W&OD Trail by East Falls Church Park,VA,Other(or unknown),PAVED,Park/Speical/Protected,7052.348088,0.5,1,236.624635,183.7512153
+86,4,Galveston Bridge,OR,Sidewalk,PAVED,Park/Speical/Protected,0.342812035,NA,0.6,NA,NA
+87,7,Drake Park Pedestrian Bridge,OR,Path/Trail,UNPAVED,Park/Speical/Protected,4.036030995,NA,0,NA,NA
+88,9,NW Portland Avenue Bridge,OR,Sidewalk,PAVED,Park/Speical/Protected,0.666497108,NA,1.6,NA,NA
+89,10,Newport Bridge,OR,Sidewalk,PAVED,Residential,0.559512765,NA,2.4,NA,NA
+90,11,NE Franklin Ave Pedestrian Tunnels,OR,Sidewalk,PAVED,Commercial/Employment,0.599767803,NA,3.4,NA,NA
+91,12,Deschutes River Trail,OR,Path/Trail,UNPAVED,Park/Speical/Protected,1.019622524,NA,0.2,NA,NA
+92,13,Reed Market Bridge,OR,Other(or unknown),PAVED,Park/Speical/Protected,1.03001615,NA,0.2,NA,NA
+93,15,Haul Trail,OR,Path/Trail,UNPAVED,Mixed-Use,0.546603315,NA,0.2,NA,NA
+94,17,Larkspur Trail (US 20 Foot Tunnel),OR,Path/Trail,PAVED,Commercial/Employment,0.436809472,NA,0.2,NA,NA
+95,18,SE Reed Market Rd (Bend Senior Center),OR,Road(no bikelane),PAVED,Residential,0.574637624,NA,0.4,NA,NA
+96,19,Columbia Bridge (SW Columbia St),OR,Bikelane,PAVED,Mixed-Use,0.678591408,NA,0.4,NA,NA
+97,21,SE Wilson Ave & Vince Genna Stadium,OR,Bikelane,PAVED,Residential,0.397607968,NA,1.4,NA,NA
+98,23,Colorado Bridge (McKay Park),OR,Bikelane,PAVED,Mixed-Use,0.550063644,NA,0.2,NA,NA
+99,29,Central Point Bear Creek Greenway,OR,Path/Trail,PAVED,Park/Speical/Protected,2417.239745,NA,0.6,NA,NA
+100,30,Medford Bear Creek Greenway,OR,Path/Trail,PAVED,Residential,2614.774372,NA,0.6,NA,NA
+101,31,Phoenix Blue Heron Park,OR,Path/Trail,PAVED,Park/Speical/Protected,2087.023728,NA,0,NA,NA
+102,32,Talent Suncrest Rd (Suncrest Rd),OR,Path/Trail,PAVED,Park/Speical/Protected,621.2979534,NA,0,NA,NA
+103,62,8th W of Adams,OR,Intersection/Crossing,PAVED,Mixed-Use,7538.38352,NA,2,NA,NA
+104,63,10th W of Jackson,OR,Road(no bikelane),PAVED,Mixed-Use,7225.322352,NA,1.6,NA,NA
+105,64,11th Ave W of Alder St,OR,Sidewalk,PAVED,Residential,12332.74606,NA,1,NA,NA
+106,65,12th W of High Alley,OR,Road(no bikelane),PAVED,Commercial/Employment,13452.88564,NA,3.6,NA,NA
+107,66,12th E of Lawrence,OR,Road(no bikelane),PAVED,Mixed-Use,9170.33506,NA,1.8,NA,NA
+108,67,12th E of Lincoln,OR,Road(no bikelane),PAVED,Commercial/Employment,9386.780304,NA,1.8,NA,NA
+109,68,12th E of Oak St,OR,Intersection/Crossing,PAVED,Commercial/Employment,12197.59313,NA,3.8,NA,NA
+110,69,13th W of Alder St,OR,Bikelane,PAVED,Commercial/Employment,14154.27623,NA,2.4,NA,NA
+111,71,13th W of Franklin,OR,Bikelane,PAVED,Park/Speical/Protected,6702.565808,NA,1.2,NA,NA
+112,72,High N of 13th,OR,Bikelane,PAVED,Commercial/Employment,13908.75846,NA,3.6,NA,NA
+113,73,13th E of Kincaid,OR,Bikelane,PAVED,Park/Speical/Protected,13912.10051,NA,1,NA,NA
+114,74,13th E of Lincoln,OR,Bikelane,PAVED,Commercial/Employment,9400.111554,NA,2.4,NA,NA
+115,75,15th Ave E of Agate St,OR,Road(no bikelane),PAVED,Park/Speical/Protected,8993.187661,NA,1,NA,NA
+116,76,13th E of Patterson,OR,Bikelane,PAVED,Commercial/Employment,14118.7554,NA,2.8,NA,NA
+117,77,15th Ave W of Alder St,OR,Road(no bikelane),PAVED,Residential,14621.65228,NA,1.8,NA,NA
+118,78,15th Ave W of Jefferson,OR,Road(no bikelane),PAVED,Residential,8001.192038,NA,0.2,NA,NA
+119,79,15th Ave W of Willamette,OR,Road(no bikelane),PAVED,Commercial/Employment,10984.59612,NA,3,NA,NA
+120,80,16th W of Alder St,OR,Road(no bikelane),PAVED,Residential,14555.6658,NA,1.6,NA,NA
+121,81,17th E of Agate St,OR,Road(no bikelane),PAVED,Park/Speical/Protected,9078.842036,NA,0.8,NA,NA
+122,82,SW Harbor Way & SW Waterfront Park,OR,Path/Trail,PAVED,Park/Speical/Protected,10665.884,NA,4.4,NA,NA
+123,83,17th E of Lawrence,OR,Road(no bikelane),PAVED,Residential,7748.138211,NA,1,NA,NA
+124,84,Alder St S of 18th St,OR,Bikelane,PAVED,Residential,13253.84657,NA,1.4,NA,NA
+125,85,18th St W of Alder St,OR,Bikelane,PAVED,Residential,13803.16914,NA,1.4,NA,NA
+126,86,24th St W of Adams,OR,Road(no bikelane),PAVED,Residential,4950.995424,NA,0.2,NA,NA
+127,87,24th St E of Fillmore,OR,Road(no bikelane),PAVED,Park/Speical/Protected,4940.139346,NA,0,NA,NA
+128,88,32nd S of Oregon  (Location ID: 36),OR,Bikelane,PAVED,Residential,3630.77125,NA,1.2,NA,NA
+129,89,42nd N of Commercial Ave,OR,Bikelane,PAVED,Residential,3626.659978,NA,1.4,NA,NA
+130,90,Agate St S of 18th,OR,Bikelane,PAVED,Residential,9048.567886,NA,0.6,NA,NA
+131,91,Agate St S of Franklin,OR,Bikelane,PAVED,Park/Speical/Protected,7756.257684,NA,1,NA,NA
+132,92,Alder St N of 27th,OR,Road(no bikelane),PAVED,Residential,5159.818708,NA,0.4,NA,NA
+133,93,Alder St S of Franklin,OR,Bikelane,PAVED,Commercial/Employment,10262.95958,NA,0.8,NA,NA
+134,94,E of Alton Baker Park Boat Ramp,OR,Path/Trail,PAVED,Park/Speical/Protected,5177.857053,NA,0.6,NA,NA
+135,95,Amazon Creek Path N of 24th,OR,Path/Trail,PAVED,Park/Speical/Protected,6762.84683,NA,0.8,NA,NA
+136,96,Bike Path E of 5th,OR,Path/Trail,PAVED,Park/Speical/Protected,5586.859673,NA,0.8,NA,NA
+137,97,Bike Path E of Pioneer Square,OR,Path/Trail,PAVED,Park/Speical/Protected,6125.648166,NA,1.2,NA,NA
+138,98,Clearwater Park Path,OR,Bikelane,PAVED,Park/Speical/Protected,412.5066463,NA,0,NA,NA
+139,99,D E of Pioneer,OR,Road(no bikelane),PAVED,Residential,4862.975885,NA,3.8,NA,NA
+140,100,E St of Defazio Bridge,OR,Path/Trail,PAVED,Park/Speical/Protected,3038.402983,NA,2,NA,NA
+141,101,W of Defazio Bridge,OR,Path/Trail,PAVED,Mixed-Use,3694.036134,NA,2.6,NA,NA
+142,102,Delta Bike-Ped Bridge,OR,Bikelane,PAVED,Park/Speical/Protected,2524.971723,NA,0,NA,NA
+143,103,Fern Ridge W of Chambers,OR,Path/Trail,PAVED,Residential,5613.577917,NA,1.2,NA,NA
+144,104,Fern Ridge E of Danebo,OR,Path/Trail,PAVED,Park/Speical/Protected,317.3180866,NA,0,NA,NA
+145,105,Fir E of River,OR,Road(no bikelane),PAVED,Commercial/Employment,2973.451337,NA,1.2,NA,NA
+146,106,Friendly S of 18th,OR,Road(no bikelane),PAVED,Residential,5333.77657,NA,0,NA,NA
+147,107,S of Frohnmeyer Bridge,OR,Path/Trail,PAVED,Mixed-Use,4755.409945,NA,0.4,NA,NA
+148,108,G W of Mohawk,OR,Road(no bikelane),PAVED,Park/Speical/Protected,5305.294996,NA,1.2,NA,NA
+149,109,Gateway Bike-Ped Bridge,OR,Bikelane,PAVED,Commercial/Employment,4977.603864,NA,0.6,NA,NA
+150,110,Goodpasture E of Delta Hwy,OR,Bikelane,PAVED,Residential,4023.088621,NA,0.2,NA,NA
+151,111,N of Greenway Bridge,OR,Path/Trail,PAVED,Commercial/Employment,2645.251097,NA,0.6,NA,NA
+152,112,S of Greenway Bridge,OR,Path/Trail,PAVED,Park/Speical/Protected,2848.85351,NA,1,NA,NA
+153,113,Harris S of 18th,OR,Road(no bikelane),PAVED,Residential,13683.94302,NA,1.6,NA,NA
+154,114,Heron Bridge,OR,Path/Trail,PAVED,Park/Speical/Protected,5309.716191,NA,1,NA,NA
+155,115,High S of 4th,OR,Road(no bikelane),PAVED,Mixed-Use,4457.171154,NA,1.8,NA,NA
+156,116,Knickerbocker Bridge,OR,Bikelane,PAVED,Park/Speical/Protected,2095.552647,NA,0.2,NA,NA
+157,117,Monroe S of 8th,OR,Road(no bikelane),PAVED,Commercial/Employment,7744.842293,NA,1.8,NA,NA
+158,118,Oakway N of Oakmont,OR,Bikelane,PAVED,Residential,3054.594241,NA,1,NA,NA
+159,119,Onyx N of Franklin,OR,Road(no bikelane),PAVED,Mixed-Use,8651.589206,NA,0.8,NA,NA
+160,120,S of Owosso Bridge,OR,Path/Trail,PAVED,Park/Speical/Protected,4411.262275,NA,0,NA,NA
+161,121,Pearl St S of 19th Ave,OR,Bikelane,PAVED,Park/Speical/Protected,10330.178,NA,2.8,NA,NA
+162,122,Pioneer Pkwy S of Q St,OR,Path/Trail,PAVED,Commercial/Employment,6150.62831,NA,2,NA,NA
+163,123,Polk St N of 24th Ave,OR,Road(no bikelane),PAVED,Residential,4847.024331,NA,0,NA,NA
+164,124,Richardson Bridge,OR,Path/Trail,PAVED,Residential,4598.289602,NA,0.8,NA,NA
+165,125,Thurston Rd E of 58th St,OR,Bikelane,PAVED,Residential,2456.359205,NA,0,NA,NA
+166,126,University St S of 18th Ave,OR,Road(no bikelane),PAVED,Residential,12372.45629,NA,1.2,NA,NA
+167,127,University St N of 24th Ave,OR,Road(no bikelane),PAVED,Residential,6721.476174,NA,0.6,NA,NA
+168,128,University St S of 24th Ave,OR,Road(no bikelane),PAVED,Residential,6633.086808,NA,0.6,NA,NA
+169,129,UO Urban Farm Path,OR,Path/Trail,PAVED,Mixed-Use,5138.941454,NA,0.6,NA,NA
+170,130,UO Zebrafish Center Path,OR,Path/Trail,PAVED,Mixed-Use,6637.492707,NA,0.6,NA,NA
+171,131,Willamette St N of 15th Ave,OR,Bikelane,PAVED,Commercial/Employment,11185.00619,NA,3.2,NA,NA
+172,132,Willamette St S of 18th Ave,OR,Road(no bikelane),PAVED,Commercial/Employment,9583.39128,NA,2.4,NA,NA
+173,133,Delta Highway,OR,Path/Trail,PAVED,Park/Speical/Protected,2970.367667,NA,0.2,NA,NA
+174,134,Broadway E of Taylor St,OR,Road(no bikelane),PAVED,Mixed-Use,5232.731005,NA,1.2,NA,NA
+175,135,12th St E of Chambers Ave,OR,Road(no bikelane),PAVED,Commercial/Employment,5677.333568,NA,2.4,NA,NA
+176,136,Friendly St N of 25th Ave,OR,Road(no bikelane),PAVED,Residential,4948.616921,NA,0.2,NA,NA
+177,137,13th Ave W of Mill Alley,OR,Bikelane,PAVED,Commercial/Employment,14027.09458,NA,3.4,NA,NA
+178,138,Canoe and Garden Way Path,OR,Path/Trail,PAVED,Park/Speical/Protected,2267.58428,NA,0.2,NA,NA
+179,139,Chambers St S of 14th Ave,OR,Bikelane,PAVED,Residential,5814.415003,NA,1.4,NA,NA
+180,140,Valley River Parking Lot,OR,Bikelane,PAVED,Commercial/Employment,2611.105073,NA,0.2,NA,NA
+181,141,8th Ave W of Pearl St,OR,Bikelane,PAVED,Park/Speical/Protected,8532.83767,NA,4,NA,NA
+182,142,Roosevelt Blvd E of Bertelsen Rd,OR,Path/Trail,PAVED,Residential,3161.917949,NA,0,NA,NA
+183,143,Randy Pape Beltline N of Roosevelt Blvd,OR,Path/Trail,PAVED,Park/Speical/Protected,3852.822417,NA,0.2,NA,NA
+184,144,Terry St N of Royal Ave,OR,Bikelane,PAVED,Park/Speical/Protected,3651.069681,NA,0,NA,NA
+185,145,Taney St N of Pattison St,OR,Road(no bikelane),PAVED,Residential,4879.65096,NA,0,NA,NA
+186,146,Horn Ln W of River Rd,OR,Sidewalk,PAVED,Residential,4115.580525,NA,0.2,NA,NA
+187,147,Maxwell Rd E of Prairie Rd,OR,Bikelane,PAVED,Industrial,3636.730886,NA,0,NA,NA
+188,148,Minda Dr E of Long Island Dr,OR,Road(no bikelane),PAVED,Residential,5224.474723,NA,0.4,NA,NA
+189,149,Crescent Ave W of Balboa St,OR,Bikelane,PAVED,Residential,4572.552218,NA,0,NA,NA
+190,150,Garden Way N of I-105,OR,Bikelane,PAVED,Residential,6230.75035,NA,0.4,NA,NA
+191,151,North Bank Trail at D St,OR,Path/Trail,PAVED,Residential,3653.364694,NA,0.8,NA,NA
+192,152,E St W of Mill St,OR,Road(no bikelane),PAVED,Residential,4786.581531,NA,3.8,NA,NA
+193,153,5th St N of M St,OR,Bikelane,PAVED,Residential,6112.165746,NA,2,NA,NA
+194,154,D St Boat Ramp,OR,Path/Trail,PAVED,Park/Speical/Protected,2525.646272,NA,0.4,NA,NA
+195,155,Willamette St N of 24th St,OR,Sidewalk,PAVED,Residential,6293.54977,NA,1.4,NA,NA
+196,156,12th Ave E of Willamette St,OR,Path/Trail,PAVED,Commercial/Employment,11349.68164,NA,3.4,NA,NA
+197,157,27th W of High St,OR,Road(no bikelane),PAVED,Residential,5382.065526,NA,0.6,NA,NA
+198,158,Willamette St S of 24th,OR,Bikelane,PAVED,Residential,6239.197998,NA,1.4,NA,NA
+199,159,24th St E of Willamette St,OR,Bikelane,PAVED,Residential,6267.542445,NA,1.4,NA,NA
+200,160,High St S of 16th,OR,Bikelane,PAVED,Residential,13373.21121,NA,3.4,NA,NA
+201,161,13th St E of Willamette St,OR,Bikelane,PAVED,Commercial/Employment,11570.74095,NA,3.2,NA,NA
+202,162,13th St E of Taylor,OR,Road(no bikelane),PAVED,Mixed-Use,5806.742164,NA,0.6,NA,NA
+203,163,13th St W of Hayes,OR,Road(no bikelane),PAVED,Residential,5821.114849,NA,2.4,NA,NA
+204,164,City View N of 18th,OR,Road(no bikelane),PAVED,Residential,6414.736165,NA,0.8,NA,NA
+205,165,Westmoreland W of Polk,OR,Path/Trail,PAVED,Park/Speical/Protected,4744.769752,NA,0,NA,NA
+206,166,Washington S of 20th,OR,Road(no bikelane),PAVED,Park/Speical/Protected,6245.187126,NA,0.2,NA,NA
+207,167,Jefferson S of 20th,OR,Road(no bikelane),PAVED,Residential,5913.349798,NA,0.2,NA,NA
+208,168,Oregon E of 32nd,OR,Road(no bikelane),PAVED,Residential,3700.031269,NA,1.4,NA,NA
+209,169,5th E of Charnelton,OR,Bikelane,PAVED,Park/Speical/Protected,5795.895391,NA,1.8,NA,NA
+210,170,Gateway E of I-5,OR,Bikelane,PAVED,Commercial/Employment,1398.680988,NA,0.4,NA,NA
+211,171,Harlow E of I-5,OR,Bikelane,PAVED,Residential,4228.660526,NA,0.4,NA,NA
+212,173,Broadway Bridge,OR,Sidewalk,PAVED,Industrial,9825.052969,NA,4.8,15.95236569,NA
+213,187,Oak Woodland Walk in Graham Oaks Park,OR,Path/Trail,PAVED,Park/Speical/Protected,1851.656146,NA,0,NA,NA
+214,251,Eastbank Esplanade,OR,Path/Trail,PAVED,Park/Speical/Protected,10231.03077,NA,6.6,NA,NA
+215,254,I-205 Trail (SE Washington St),OR,Path/Trail,PAVED,Industrial,1301.799941,NA,0,NA,NA
+216,255,I-205 Trail (Springwater Corridor Trail),OR,Path/Trail,PAVED,Park/Speical/Protected,5847.375195,NA,0.6,NA,NA
+217,256,Hawthorne Bridge,OR,Bikelane,PAVED,Park/Speical/Protected,7878.00992,NA,3.8,520.5579023,NA
+218,289,75 Marine Drive Trail ,OR,Path/Trail,PAVED,Park/Speical/Protected,184.512855,NA,0,NA,NA
+219,290,Marine Drive Trail (NE Marine Dr),OR,Path/Trail,PAVED,Park/Speical/Protected,236.4115548,NA,0,NA,NA
+220,291,Peninsula Crossing Trail (N Lombard St),OR,Path/Trail,PAVED,Commercial/Employment,6549.621333,NA,1,NA,NA
+221,292,I-205 Trail (NE Halsey St),OR,Path/Trail,PAVED,Park/Speical/Protected,5412.676213,NA,0.8,NA,NA
+222,293,Steel Bridge Riverwalk,OR,Path/Trail,PAVED,Industrial,10627.97579,NA,6.8,657.5237024,NA
+223,294,Saltzman Rd Path (NW Leif Eriksen Dr),OR,Path/Trail,PAVED,Park/Speical/Protected,122.4307055,NA,0,NA,NA
+224,295,Wildwood Trail (NW Cornell Rd),OR,Path/Trail,PAVED,Park/Speical/Protected,576.946522,NA,0,NA,NA
+225,296,Steel Bridge,OR,Sidewalk,PAVED,Industrial,10259.15292,NA,8,47.473169,NA
+226,297,Wildwood Trail (W Burnside Rd),OR,Path/Trail,PAVED,Park/Speical/Protected,1730.356063,NA,0,NA,NA
+227,298,SW Terwilliger Blvd Path (Capitol Hwy),OR,Path/Trail,PAVED,Park/Speical/Protected,3864.344527,NA,0.2,NA,NA
+228,299,SW Terwilliger Blvd Path (Campus Dr),OR,Sidewalk,PAVED,Park/Speical/Protected,4382.310881,NA,0.6,NA,NA
+229,300,Highway 26 Trail near SW Skyline Blvd,OR,Path/Trail,PAVED,Mixed-Use,1749.571579,NA,0.4,NA,NA
+230,301,Red Electric Trail near SW Bertha Blvd,OR,Path/Trail,PAVED,Mixed-Use,5397.594386,NA,1.8,NA,NA
+231,303,82nd Ave from Humboldt St to Wygant St,OR,Road(no bikelane),PAVED,Residential,4228.523221,NA,0.6,NA,NA
+232,304,NE Glisan Street at NE 134th Ave,OR,Intersection/Crossing,PAVED,Park/Speical/Protected,5128.933041,NA,0.4,NA,NA
+233,305,SE 82nd Ave at SE Cooper Street,OR,Intersection/Crossing,PAVED,Mixed-Use,8174.774063,NA,0.8,NA,NA
+234,306,SE Powell Blvd at SE 168th Ave,OR,Intersection/Crossing,PAVED,Mixed-Use,5721.785839,NA,0.4,NA,NA
+235,307,SW Barbur Blvd at SW Lane Street,OR,Intersection/Crossing,PAVED,Mixed-Use,8533.123546,NA,1,NA,NA
+236,308,SW Barbur Blvd at SW Luradel St,OR,Intersection/Crossing,PAVED,Mixed-Use,5281.705272,NA,0.4,NA,NA
+237,309,NE Cully Blvd at NE Prescott Street,OR,Intersection/Crossing,PAVED,Mixed-Use,6903.731396,NA,0,NA,NA
+238,315,NW Willamette Greenway Trail,OR,Path/Trail,PAVED,Mixed-Use,15025.05697,NA,4.8,NA,NA
+239,316,Morrison Bridge path,OR,Path/Trail,PAVED,Park/Speical/Protected,6545.351094,NA,3.2,NA,NA
+240,317,Waterfront Park Trail S of Morrison Bdg,OR,Path/Trail,PAVED,Park/Speical/Protected,7238.123546,NA,4.2,NA,NA
+241,318,SW Willamette Greenway at SW Landing Dr,OR,Path/Trail,PAVED,Mixed-Use,6115.663628,NA,0.4,NA,NA
+242,319,Cathedral Park Trail,OR,Path/Trail,PAVED,Commercial/Employment,3296.510627,NA,0.8,NA,NA
+243,320,Waud Bluff Trail at N Willamette Blvd,OR,Path/Trail,PAVED,Park/Speical/Protected,4965.082544,NA,0.2,NA,NA
+244,321,North Portland Willamette Greenway,OR,Path/Trail,PAVED,Commercial/Employment,933.7313058,NA,0.2,NA,NA
+245,322,Steel Bridge Lower Deck Riverwalk,OR,Path/Trail,PAVED,Park/Speical/Protected,10384.99379,NA,6.8,NA,NA
+246,324,Eastbank Esplanade S of Burnside Bridge,OR,Path/Trail,PAVED,Park/Speical/Protected,6843.410383,NA,5.8,NA,NA
+247,327,SW Moody Ave,OR,Bikelane,PAVED,Mixed-Use,8355.112607,NA,1.4,NA,NA
+248,328,Eastbank Esplanade E of OMSI,OR,Path/Trail,PAVED,Mixed-Use,4584.337098,NA,1.4,NA,NA
+249,329,Springwater on Willamette at Oaks Bottom,OR,Path/Trail,PAVED,Park/Speical/Protected,2486.955865,NA,0,NA,NA
+250,331,Springwater Corridor at SE 19th Ave,OR,Path/Trail,PAVED,Commercial/Employment,5331.321734,NA,0.8,NA,NA
+251,332,Springwater Corridor at SE 82nd Ave,OR,Path/Trail,PAVED,Park/Speical/Protected,6527.095449,NA,0.8,NA,NA
+252,333,Springwater Corridor at I-205 Path,OR,Path/Trail,PAVED,Park/Speical/Protected,5847.352978,NA,0.6,NA,NA
+253,334,Springwater on Willamette at Spokane St,OR,Path/Trail,PAVED,Mixed-Use,6167.189178,NA,0.2,NA,NA
+254,335,5 Broadway Bridge,OR,Path/Trail,PAVED,Mixed-Use,19716.92045,NA,3.8,NA,NA
+255,340,N Willamette Blvd at Waud Bluff Trail,OR,Intersection/Crossing,PAVED,Park/Speical/Protected,4965.459029,NA,0.2,NA,NA
+256,348,Eastbank Esplanade S of Yamhill St,OR,Path/Trail,PAVED,Park/Speical/Protected,5213.52904,NA,2.8,NA,NA
+257,349,Eastbank Esplanade N of Taylor St,OR,Path/Trail,PAVED,Park/Speical/Protected,5295.051045,NA,2.4,NA,NA
+258,350,Going St E of 28th Ave,OR,Road(no bikelane),UNPAVED,Residential,9177.459503,NA,0.8,NA,NA
+259,351,Going St E of 9th Ave,OR,Road(no bikelane),PAVED,Residential,10023.33079,NA,1.6,NA,NA
+260,352,Caruthers St W of 4th Ave,OR,Road(no bikelane),UNPAVED,Mixed-Use,4232.316315,NA,3,NA,NA
+261,353,East Greenway Trail along Willamette Riv,OR,Path/Trail,PAVED,Mixed-Use,17401.16372,NA,3.6,NA,NA
+262,354,Eastside Esplanade Overpass Steel Bridge,OR,Path/Trail,PAVED,Industrial,9959.948386,NA,7.2,NA,NA
+263,355,53rd Ave S of Hancock St,OR,Road(no bikelane),PAVED,Residential,8756.60578,NA,0.8,NA,NA
+264,356,53rd Ave S of Hassalo St,OR,Road(no bikelane),PAVED,Residential,8354.798754,NA,0.6,NA,NA
+265,358,I-205 Multi Use Path on Yamhill St,OR,Path/Trail,PAVED,Residential,5770.631081,NA,1.2,NA,NA
+266,444,122nd Ave N of Market St,OR,Bikelane,PAVED,Mixed-Use,9328.627569,NA,1.2,NA,NA
+267,445,122nd Ave S of Market St,OR,Bikelane,PAVED,Commercial/Employment,9481.244942,NA,1.8,NA,NA
+268,462,Broadway St E of Williams Ave,OR,Bikelane,PAVED,Mixed-Use,6138.306806,NA,8.2,NA,NA
+269,472,NW 9th Ave N of NW Lovejoy St,OR,Bikelane,PAVED,Mixed-Use,20455.90519,NA,3.8,NA,NA
+270,482,NE Weidler St E of NE 2nd Ave,OR,Bikelane,PAVED,Mixed-Use,6280.88271,NA,9.2,NA,NA
+271,543,Tilikum Crossing Bridge,OR,Bikelane,PAVED,Mixed-Use,7572.587908,NA,0.8,689.3486665,NA
+272,550,NE Cully Blvd S of NE Killingsworth St,OR,Bikelane,PAVED,Mixed-Use,5932.908108,NA,0.2,NA,NA
+273,1469,Sellwood Bridge (near Springwater intersection),OR,Bridge,PAVED,Mixed-Use,6164.387513,NA,0.4,NA,NA
+274,1470,Broadway Bridge (near Pacific Highway),OR,Bridge,PAVED,Mixed-Use,9917.896366,NA,5.2,NA,NA
+275,1471,Eastbank Esplande Trail (in between Morrison and Hawthorne Bridge),OR,Path/Trail,PAVED,Park/Speical/Protected,5340.312283,NA,2.4,NA,NA
+276,1472,Hawthorne Bridge Bike Path (right turn off going West),OR,Bridge,PAVED,Park/Speical/Protected,9526.166778,NA,4.4,NA,NA
+277,1474,Path along Hawthorne Bridge,OR,Path/Trail,PAVED,Park/Speical/Protected,8390.152305,NA,4,NA,NA
+278,1475,Trolley Trail at Stringfield,OR,Path/Trail,PAVED,Residential,3882.881138,NA,0.6,86.81441052,156.793558
+279,1476,Trolley Trail at Park Ave,OR,Path/Trail,PAVED,Commercial/Employment,5645.058845,NA,0,123.6439036,140.6039171
+280,1739,Blumenauer Bridge,OR,Path/Trail,PAVED,Industrial,7047.819021,NA,7.8,240.1210522,NA
