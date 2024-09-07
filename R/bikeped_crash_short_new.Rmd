@@ -1,7 +1,7 @@
 ---
 title: "Where do Bike/Ped Crashes Occur?"
 author: "Kyu Ri Kim"
-date: "`r Sys.Date()`"
+date: "2024-09-05"
 output: 
   html_document:
     toc: true
@@ -32,36 +32,36 @@ library(htmltools)
 
 
 # data (CVS) included
-data_segment_ave <- read_csv("G:/My Drive/8_TREC/bikeped/data/data_6yrcrash_vol.csv")
-data_state_year <- read_csv("G:/My Drive/8_TREC/bikeped/data/data_volume_crash_year_new.csv")
-data_state_month <- read_csv("G:/My Drive/8_TREC/bikeped/data/data_volume_crash_month.csv")
-speed <- read_csv("G:/My Drive/8_TREC/bikeped/data/speed_id_halfmi_month.csv")
+data_segment_ave <- read_csv("C:/Users/user/TREC_public/data/data_6yrcrash_vol.csv")
+data_state_year <- read_csv("C:/Users/user/TREC_public/data/data_volume_crash_year_new.csv")
+data_state_month <- read_csv("C:/Users/user/TREC_public/data/data_volume_crash_month.csv")
+speed <- read_csv("C:/Users/user/TREC_public/data/speed_id_halfmi_month.csv")
 
-bikecrash_segment_year <- read_csv("G:/My Drive/8_TREC/bikeped/data/bikecrash_long.csv")
-pedcrash_segment_year <-read_csv("G:/My Drive/8_TREC/bikeped/data/pedcrash_long.csv")
-p_monthly_bike <- read_csv("G:/My Drive/8_TREC/bikeped/data/p_monthly_bike.csv")
-p_monthly_ped <- read_csv("G:/My Drive/8_TREC/bikeped/data/p_monthly_ped.csv")
+bikecrash_segment_year <- read_csv("C:/Users/user/TREC_public/data/bikecrash_long.csv")
+pedcrash_segment_year <-read_csv("C:/Users/user/TREC_public/data/pedcrash_long.csv")
+p_monthly_bike <- read_csv("C:/Users/user/TREC_public/data/p_monthly_bike.csv")
+p_monthly_ped <- read_csv("C:/Users/user/TREC_public/data/p_monthly_ped.csv")
 
 
 # data (CVS) included
-sf_bikevol <- read_sf("G:/My Drive/8_TREC/bikeped/data/bikevol.shp") %>% mutate(segment_area_id=segment_ar) 
+sf_bikevol <- read_sf("C:/Users/user/TREC_public/data/bikevol.shp") %>% mutate(segment_area_id=segment_ar) 
 sf_bikevol <- left_join(sf_bikevol,data_segment_ave,by='segment_area_id')
-sf_bikevol_half_or <- read_sf("G:/My Drive/8_TREC/bikeped/data/or_bikevol_half.shp")
+sf_bikevol_half_or <- read_sf("C:/Users/user/TREC_public/data/or_bikevol_half.shp")
 
-sf_pedvol <- read_sf("G:/My Drive/8_TREC/bikeped/data/bikevol.shp")%>% mutate(segment_area_id=segment_ar) 
+sf_pedvol <- read_sf("C:/Users/user/TREC_public/data/bikevol.shp")%>% mutate(segment_area_id=segment_ar) 
 sf_pedvol <- left_join(sf_pedvol,data_segment_ave,by='segment_area_id')
 
 
-sf_bikepedvol_vol_dcva <- read_sf("G:/My Drive/8_TREC/bikeped/data/bikepedvol_half_dcva.shp")
+sf_bikepedvol_vol_dcva <- read_sf("C:/Users/user/TREC_public/data/bikepedvol_half_dcva.shp")
 
-sf_bikecrash_dcva <- read_sf("G:/My Drive/8_TREC/bikeped/data/bikecrash_dcva.shp")
-sf_bikecrash_dcva_volume <- read_sf("G:/My Drive/8_TREC/bikeped/data/bike_crash_dcva_forvolumecase.shp")
-sf_pedcrash_dcva <- read_sf("G:/My Drive/8_TREC/bikeped/data/pedcrash_dcva.shp")
-sf_pedcrash_dcva_volume <- read_sf("G:/My Drive/8_TREC/bikeped/data/ped_crash_dcva_forvolumecase.shp")
-sf_popdenhalf_dcva <- read_sf("G:/My Drive/8_TREC/bikeped/data/dcvapopden_half.shp")
-sf_bikecrash_or <- read_sf("G:/My Drive/8_TREC/bikeped/data/bikecrash_or.shp")
-sf_bikecrash_or_volume <- read_sf("G:/My Drive/8_TREC/bikeped/data/bike_crash_or_forvolumecase.shp")
-sf_popdenhalf_or <- read_sf("G:/My Drive/8_TREC/bikeped/data/orpopden_half.shp")
+sf_bikecrash_dcva <- read_sf("C:/Users/user/TREC_public/data/bikecrash_dcva.shp")
+sf_bikecrash_dcva_volume <- read_sf("C:/Users/user/TREC_public/data/bike_crash_dcva_forvolumecase.shp")
+sf_pedcrash_dcva <- read_sf("C:/Users/user/TREC_public/data/pedcrash_dcva.shp")
+sf_pedcrash_dcva_volume <- read_sf("C:/Users/user/TREC_public/data/ped_crash_dcva_forvolumecase.shp")
+sf_popdenhalf_dcva <- read_sf("C:/Users/user/TREC_public/data/dcvapopden_half.shp")
+sf_bikecrash_or <- read_sf("C:/Users/user/TREC_public/data/bikecrash_or.shp")
+sf_bikecrash_or_volume <- read_sf("C:/Users/user/TREC_public/data/bike_crash_or_forvolumecase.shp")
+sf_popdenhalf_or <- read_sf("C:/Users/user/TREC_public/data/orpopden_half.shp")
 
 
 # create pivot table for monthly bike volume
@@ -293,7 +293,7 @@ m_volume_or <- leaflet() %>%
 m_volume_or
 ```
 
-# 3. Where do Bike/Ped Crash Occur?
+# 3. Where do Bike/Ped Crashes Occur?
 ## 3.1. Population Density & Bike/Ped Crash
 ```{r echo=FALSE, warning=FALSE}
 
@@ -570,7 +570,7 @@ ggplot(data_segment_ave) +
 ```
 
 
-# 4. When do Bike/Ped Crash Occur?
+# 4. When do Bike/Ped Crashes Occur?
 ## 4.1. Yearly Trend
 ### 4.1.1. Bike Volume & Bike Crash
 ```{r echo=FALSE, warning=FALSE}
